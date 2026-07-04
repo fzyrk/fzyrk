@@ -1,0 +1,234 @@
+<!-- ══════════════════════ HERO SECTION ══════════════════════ -->
+<section class="hero">
+  <div class="hero__bg">
+    <div class="hero__orb hero__orb--1"></div>
+    <div class="hero__orb hero__orb--2"></div>
+    <div class="hero__grid-lines"></div>
+  </div>
+  <div class="fz-container hero__content">
+    <div class="hero__badge">
+      <span class="hero__badge-dot"></span>
+      Now live — Resume Builder v1.0
+    </div>
+    <h1 class="hero__title fz-display">
+      Build Your Career<br>
+      <span class="fz-gradient-text">With Beautiful Tools</span>
+    </h1>
+    <p class="hero__subtitle">
+      Fzyrk is an all-in-one career platform built for the modern professional.
+      Create stunning resumes, prep for interviews, and land your dream job.
+    </p>
+    <div class="hero__cta">
+      <a routerLink="/products/resume" class="btn btn--primary btn--lg hero__cta-primary">
+        Start Building Free
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a routerLink="/products" class="btn btn--outline btn--lg">
+        Explore Products
+      </a>
+    </div>
+    <div class="hero__stats">
+      @for (stat of stats; track stat.label) {
+        <div class="hero__stat">
+          <span class="hero__stat-value">{{ stat.value }}</span>
+          <span class="hero__stat-label">{{ stat.label }}</span>
+        </div>
+      }
+    </div>
+  </div>
+  <!-- Floating Resume Preview -->
+  <div class="hero__preview fz-container">
+    <div class="hero__preview-card">
+      <div class="preview-topbar">
+        <span></span><span></span><span></span>
+        <div class="preview-url">fzyrk.com/products/resume</div>
+      </div>
+      <div class="preview-body">
+        <div class="preview-sidebar">
+          <div class="preview-avatar"></div>
+          <div class="preview-line preview-line--name"></div>
+          <div class="preview-line preview-line--role"></div>
+          <div class="preview-section-title">CONTACT</div>
+          <div class="preview-line preview-line--sm"></div>
+          <div class="preview-line preview-line--sm"></div>
+          <div class="preview-line preview-line--sm"></div>
+          <div class="preview-section-title">SKILLS</div>
+          <div class="preview-tags">
+            <span class="preview-tag">Angular</span>
+            <span class="preview-tag">React</span>
+            <span class="preview-tag">TypeScript</span>
+            <span class="preview-tag">Node.js</span>
+          </div>
+        </div>
+        <div class="preview-main">
+          <div class="preview-section-title">EXPERIENCE</div>
+          <div class="preview-job">
+            <div class="preview-line preview-line--job-title"></div>
+            <div class="preview-line preview-line--company"></div>
+            <div class="preview-line"></div>
+            <div class="preview-line"></div>
+            <div class="preview-line preview-line--sm"></div>
+          </div>
+          <div class="preview-job">
+            <div class="preview-line preview-line--job-title"></div>
+            <div class="preview-line preview-line--company"></div>
+            <div class="preview-line"></div>
+            <div class="preview-line preview-line--sm"></div>
+          </div>
+          <div class="preview-section-title">EDUCATION</div>
+          <div class="preview-job">
+            <div class="preview-line preview-line--job-title"></div>
+            <div class="preview-line preview-line--company"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ PRODUCTS SECTION ══════════════════════ -->
+<section class="section products-section">
+  <div class="fz-container">
+    <div class="section-header" data-reveal>
+      <p class="fz-overline" style="color: var(--fz-text-accent)">The Platform</p>
+      <h2 class="section-title fz-heading">Everything You Need to<br><span class="fz-gradient-text">Land Your Dream Job</span></h2>
+      <p class="section-subtitle">Six powerful products, one unified platform. Start with Resume Builder today, unlock more as they launch.</p>
+    </div>
+
+    <div class="products-grid">
+      @for (product of products; track product.id) {
+        <div class="product-card" [class.product-card--live]="product.status === 'live'" data-reveal>
+          <div class="product-card__header">
+            <div class="product-card__icon">{{ product.icon }}</div>
+            <span class="product-badge" [class]="getStatusClass(product.status)">{{ product.badge }}</span>
+          </div>
+          <h3 class="product-card__name">{{ product.name }}</h3>
+          <p class="product-card__desc">{{ product.description }}</p>
+          @if (product.status === 'live') {
+            <a [routerLink]="product.route" class="product-card__link">
+              Open App
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          } @else {
+            <span class="product-card__soon">Coming Soon</span>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ STATS SECTION ══════════════════════ -->
+<section class="section stats-section">
+  <div class="fz-container">
+    <div class="stats-grid">
+      @for (stat of stats; track stat.label) {
+        <div class="stat-item" data-reveal>
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-label">{{ stat.label }}</div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ VALUES SECTION ══════════════════════ -->
+<section class="section values-section">
+  <div class="fz-container">
+    <div class="section-header" data-reveal>
+      <p class="fz-overline" style="color: var(--fz-text-accent)">Why Fzyrk</p>
+      <h2 class="section-title fz-heading">Built Different,<br><span class="fz-gradient-text">Built Better</span></h2>
+    </div>
+    <div class="values-grid">
+      @for (value of values; track value.title) {
+        <div class="value-card" data-reveal>
+          <div class="value-card__icon">{{ value.icon }}</div>
+          <h3 class="value-card__title">{{ value.title }}</h3>
+          <p class="value-card__desc">{{ value.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ROADMAP SECTION ══════════════════════ -->
+<section class="section roadmap-section">
+  <div class="fz-container">
+    <div class="section-header" data-reveal>
+      <p class="fz-overline" style="color: var(--fz-text-accent)">Our Journey</p>
+      <h2 class="section-title fz-heading">Building in Public,<br><span class="fz-gradient-text">One Phase at a Time</span></h2>
+      <p class="section-subtitle">We share our progress openly. Follow along as we build the future of career tools.</p>
+    </div>
+    <div class="roadmap-timeline">
+      @for (phase of roadmapPhases; track phase.phase) {
+        <div class="roadmap-item" [class]="getPhaseClass(phase.status)" data-reveal>
+          <div class="roadmap-item__connector">
+            <div class="roadmap-item__dot">{{ phase.status === 'complete' ? '✓' : phase.phase }}</div>
+            <div class="roadmap-item__line"></div>
+          </div>
+          <div class="roadmap-item__content">
+            <div class="roadmap-item__header">
+              <h3 class="roadmap-item__title">Phase {{ phase.phase }} — {{ phase.title }}</h3>
+              <span class="roadmap-item__status">
+                @if (phase.status === 'complete')    { ✓ Complete }
+                @if (phase.status === 'in-progress') { 🔵 In Progress }
+                @if (phase.status === 'upcoming')    { ⬜ Upcoming }
+              </span>
+            </div>
+            <ul class="roadmap-item__items">
+              @for (item of phase.items; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ BLOG PREVIEW SECTION ══════════════════════ -->
+<section class="section blog-section">
+  <div class="fz-container">
+    <div class="section-header" data-reveal>
+      <p class="fz-overline" style="color: var(--fz-text-accent)">From the Blog</p>
+      <h2 class="section-title fz-heading">Insights for the<br><span class="fz-gradient-text">Modern Professional</span></h2>
+    </div>
+    <div class="blog-grid">
+      @for (post of blogPosts; track post.slug) {
+        <article class="blog-card" data-reveal>
+          <div class="blog-card__meta">
+            <span class="blog-card__category">{{ post.category }}</span>
+            <span class="blog-card__time">{{ post.readTime }} read</span>
+          </div>
+          <h3 class="blog-card__title">{{ post.title }}</h3>
+          <div class="blog-card__footer">
+            <span class="blog-card__date">{{ post.date }}</span>
+            <a routerLink="/blog" class="blog-card__link">Read More →</a>
+          </div>
+        </article>
+      }
+    </div>
+    <div style="text-align:center; margin-top: var(--fz-space-10);">
+      <a routerLink="/blog" class="btn btn--outline">View All Posts</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CTA SECTION ══════════════════════ -->
+<section class="cta-section">
+  <div class="fz-container">
+    <div class="cta-card" data-reveal>
+      <div class="cta-card__orb"></div>
+      <h2 class="cta-card__title fz-display">Ready to Build Your<br><span class="fz-gradient-text">Dream Career?</span></h2>
+      <p class="cta-card__subtitle">Join thousands of professionals using Fzyrk to craft the perfect resume and land their dream job.</p>
+      <div class="cta-card__actions">
+        <a routerLink="/products/resume" class="btn btn--primary btn--lg">
+          Start for Free
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a routerLink="/contact" class="btn btn--outline btn--lg">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+</section>

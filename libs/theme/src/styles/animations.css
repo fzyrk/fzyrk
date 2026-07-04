@@ -1,0 +1,89 @@
+/* ── Keyframe Animations ── */
+@keyframes fz-fade-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fz-fade-in-left {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fz-fade-in-right {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fz-scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fz-slide-up {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes fz-slide-down {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes fz-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+@keyframes fz-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes fz-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes fz-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fz-glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(99,102,241,0.2); }
+  50%       { box-shadow: 0 0 40px rgba(99,102,241,0.4); }
+}
+
+@keyframes fz-count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Scroll Reveal ── */
+.fz-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--fz-dur-slow) var(--fz-ease-out),
+              transform var(--fz-dur-slow) var(--fz-ease-out);
+}
+
+.fz-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Stagger Children ── */
+.fz-stagger > .fz-reveal:nth-child(1) { transition-delay: 0ms; }
+.fz-stagger > .fz-reveal:nth-child(2) { transition-delay: 80ms; }
+.fz-stagger > .fz-reveal:nth-child(3) { transition-delay: 160ms; }
+.fz-stagger > .fz-reveal:nth-child(4) { transition-delay: 240ms; }
+.fz-stagger > .fz-reveal:nth-child(5) { transition-delay: 320ms; }
+.fz-stagger > .fz-reveal:nth-child(6) { transition-delay: 400ms; }
+
+/* ── Animation Utility Classes ── */
+.fz-animate-fade-in     { animation: fz-fade-in var(--fz-dur-slow) var(--fz-ease-out) both; }
+.fz-animate-scale-in    { animation: fz-scale-in var(--fz-dur-slow) var(--fz-ease-out) both; }
+.fz-animate-float       { animation: fz-float 3s ease-in-out infinite; }
+.fz-animate-spin        { animation: fz-spin 1s linear infinite; }
+.fz-animate-pulse       { animation: fz-pulse 2s ease-in-out infinite; }
+.fz-animate-glow-pulse  { animation: fz-glow-pulse 3s ease-in-out infinite; }

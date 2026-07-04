@@ -1,0 +1,3 @@
+<div class="card" [ngClass]="classes" (click)="onClick()" [attr.role]="clickable ? 'button' : null" [attr.tabindex]="clickable ? 0 : null">
+  <ng-content />
+</div>

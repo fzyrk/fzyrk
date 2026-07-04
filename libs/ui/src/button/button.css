@@ -1,0 +1,110 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fz-space-2);
+  font-family: var(--fz-font-primary);
+  font-weight: var(--fz-weight-semibold);
+  border-radius: var(--fz-radius-md);
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  transition:
+    background var(--fz-dur-fast) var(--fz-ease-out),
+    color var(--fz-dur-fast) var(--fz-ease-out),
+    border-color var(--fz-dur-fast) var(--fz-ease-out),
+    box-shadow var(--fz-dur-fast) var(--fz-ease-out),
+    transform var(--fz-dur-fast) var(--fz-ease-out);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.btn:hover:not([disabled]) {
+  transform: translateY(-1px);
+}
+
+.btn:active:not([disabled]) {
+  transform: translateY(0);
+}
+
+/* ── Sizes ── */
+.btn--sm { font-size: var(--fz-text-sm); padding: var(--fz-space-2) var(--fz-space-4); height: 32px; }
+.btn--md { font-size: var(--fz-text-sm); padding: var(--fz-space-3) var(--fz-space-6); height: 40px; }
+.btn--lg { font-size: var(--fz-text-base); padding: var(--fz-space-4) var(--fz-space-8); height: 48px; }
+
+/* ── Variants ── */
+.btn--primary {
+  background: var(--fz-accent);
+  color: white;
+  box-shadow: 0 0 0 rgba(99,102,241,0);
+}
+.btn--primary:hover:not([disabled]) {
+  background: var(--fz-accent-hover);
+  box-shadow: var(--fz-shadow-glow);
+}
+
+.btn--secondary {
+  background: var(--fz-bg-elevated);
+  color: var(--fz-text-primary);
+  border-color: var(--fz-border);
+}
+.btn--secondary:hover:not([disabled]) {
+  background: var(--fz-bg-surface);
+  border-color: var(--fz-border-strong);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--fz-accent);
+  border-color: var(--fz-accent);
+}
+.btn--outline:hover:not([disabled]) {
+  background: var(--fz-accent-glow);
+  box-shadow: var(--fz-shadow-glow);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--fz-text-secondary);
+}
+.btn--ghost:hover:not([disabled]) {
+  background: var(--fz-bg-elevated);
+  color: var(--fz-text-primary);
+}
+
+.btn--danger {
+  background: var(--fz-error);
+  color: white;
+}
+.btn--danger:hover:not([disabled]) {
+  background: #dc2626;
+}
+
+/* ── States ── */
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn--full {
+  width: 100%;
+}
+
+/* ── Spinner ── */
+.btn__spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: fz-spin 0.6s linear infinite;
+}
+
+.btn__label {
+  display: inline-flex;
+  align-items: center;
+}

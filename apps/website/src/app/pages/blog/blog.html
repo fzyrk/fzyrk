@@ -1,0 +1,34 @@
+<section class="page-hero">
+  <div class="fz-container page-hero__content">
+    <p class="fz-overline" style="color:var(--fz-text-accent)">Fzyrk Blog</p>
+    <h1 class="page-hero__title fz-display">Insights for the<br><span class="fz-gradient-text">Modern Professional</span></h1>
+    <p class="page-hero__subtitle">Career tips, tech deep-dives, and startup stories from the Fzyrk team.</p>
+  </div>
+</section>
+<section class="section fz-container">
+  <div class="blog-filters" data-reveal>
+    @for (cat of categories; track cat) {
+      <button class="filter-btn" [class.filter-btn--active]="activeCategory() === cat" (click)="setCategory(cat)">{{ cat }}</button>
+    }
+  </div>
+  <div class="blog-grid">
+    @for (post of filteredPosts; track post.title) {
+      <article class="blog-card" data-reveal>
+        <div class="blog-card__meta">
+          <span class="blog-card__category">{{ post.category }}</span>
+          <span class="blog-card__time">{{ post.readTime }} read</span>
+        </div>
+        <h2 class="blog-card__title">{{ post.title }}</h2>
+        <p class="blog-card__excerpt">{{ post.excerpt }}</p>
+        <div class="blog-card__footer">
+          <span class="blog-card__date">{{ post.date }}</span>
+          <span class="blog-card__coming">Coming Soon</span>
+        </div>
+      </article>
+    }
+  </div>
+  <div class="coming-soon-banner" data-reveal>
+    <h3>📝 More posts coming soon</h3>
+    <p>We're writing in-depth articles on Angular, career development, and startup life. Subscribe for updates.</p>
+  </div>
+</section>

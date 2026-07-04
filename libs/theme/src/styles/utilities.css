@@ -1,0 +1,91 @@
+/* ── Layout Containers ── */
+.fz-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--fz-space-6);
+}
+
+.fz-container-sm  { max-width: 800px; }
+.fz-container-lg  { max-width: 1400px; }
+
+.fz-section {
+  padding: var(--fz-space-24) 0;
+}
+
+/* ── Glassmorphism ── */
+.fz-glass {
+  background: var(--fz-bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--fz-border);
+}
+
+.fz-glow-border {
+  border: 1px solid var(--fz-border-glow);
+}
+
+/* ── Text Utilities ── */
+.fz-text-center   { text-align: center; }
+.fz-text-left     { text-align: left; }
+.fz-text-right    { text-align: right; }
+
+/* ── Accessibility ── */
+.fz-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* ── Flex Utilities ── */
+.fz-flex         { display: flex; }
+.fz-flex-center  { display: flex; align-items: center; justify-content: center; }
+.fz-flex-between { display: flex; align-items: center; justify-content: space-between; }
+.fz-flex-col     { display: flex; flex-direction: column; }
+.fz-gap-2        { gap: var(--fz-space-2); }
+.fz-gap-4        { gap: var(--fz-space-4); }
+.fz-gap-6        { gap: var(--fz-space-6); }
+.fz-gap-8        { gap: var(--fz-space-8); }
+
+/* ── Grid Utilities ── */
+.fz-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--fz-space-6);
+}
+
+.fz-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--fz-space-6);
+}
+
+.fz-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--fz-space-6);
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 160, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 100, 160, 0.5);
+}

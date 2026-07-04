@@ -1,0 +1,76 @@
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="hero-orb hero-orb--1"></div>
+  <div class="hero-orb hero-orb--2"></div>
+  <div class="fz-container page-hero__content">
+    <p class="fz-overline" style="color:var(--fz-text-accent)" data-reveal>Our Story</p>
+    <h1 class="page-hero__title fz-display" data-reveal>Built by Dreamers,<br><span class="fz-gradient-text">For Achievers</span></h1>
+    <p class="page-hero__subtitle" data-reveal>Fzyrk started with a simple belief: every professional deserves tools that are as ambitious as their goals. We're building the platform we always wished existed.</p>
+  </div>
+</section>
+
+<!-- Mission & Vision -->
+<section class="section mv-section fz-container">
+  <div class="mv-grid">
+    <div class="mv-card" data-reveal>
+      <div class="mv-card__icon">🎯</div>
+      <h2 class="mv-card__title">Our Mission</h2>
+      <p class="mv-card__desc">To democratize career success by giving every professional — regardless of resources or background — access to world-class career tools that are beautiful, fast, and free to use.</p>
+    </div>
+    <div class="mv-card mv-card--vision" data-reveal>
+      <div class="mv-card__icon">🌟</div>
+      <h2 class="mv-card__title">Our Vision</h2>
+      <p class="mv-card__desc">A world where your next great opportunity finds you — powered by AI, driven by data, and built on a platform that grows with you from your first resume to your dream job offer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Values -->
+<section class="section values-section">
+  <div class="fz-container">
+    <div class="section-header" data-reveal>
+      <p class="fz-overline" style="color:var(--fz-text-accent)">Core Values</p>
+      <h2 class="section-title fz-heading">What We <span class="fz-gradient-text">Stand For</span></h2>
+    </div>
+    <div class="values-grid">
+      @for (v of values; track v.title) {
+        <div class="value-card" data-reveal>
+          <span class="value-card__icon">{{ v.icon }}</span>
+          <h3 class="value-card__title">{{ v.title }}</h3>
+          <p class="value-card__desc">{{ v.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Tech Stack -->
+<section class="section tech-section">
+  <div class="fz-container">
+    <div class="section-header" data-reveal>
+      <p class="fz-overline" style="color:var(--fz-text-accent)">Built With</p>
+      <h2 class="section-title fz-heading">Modern Tech,<br><span class="fz-gradient-text">Battle-Tested Stack</span></h2>
+    </div>
+    <div class="tech-grid">
+      @for (tech of techStack; track tech.name) {
+        <div class="tech-card" data-reveal>
+          <span class="tech-card__icon">{{ tech.icon }}</span>
+          <div>
+            <h4 class="tech-card__name">{{ tech.name }}</h4>
+            <p class="tech-card__desc">{{ tech.desc }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section fz-container" style="text-align:center;" data-reveal>
+  <h2 class="section-title fz-heading" style="margin-bottom:var(--fz-space-4)">Ready to Start?</h2>
+  <p style="color:var(--fz-text-secondary);margin-bottom:var(--fz-space-8)">Join us on this journey. Try our Resume Builder — it's free, always.</p>
+  <div style="display:flex;gap:var(--fz-space-4);justify-content:center;flex-wrap:wrap;">
+    <a routerLink="/products/resume" class="btn btn--primary btn--lg">Try Resume Builder</a>
+    <a routerLink="/contact" class="btn btn--outline btn--lg">Get in Touch</a>
+  </div>
+</section>

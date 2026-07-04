@@ -1,0 +1,7 @@
+{
+  "buildCommand": "npx nx build website --configuration=production",
+  "outputDirectory": "dist/apps/website/browser",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

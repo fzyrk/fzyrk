@@ -1,0 +1,38 @@
+<section class="page-hero">
+  <div class="fz-container page-hero__content">
+    <p class="fz-overline" style="color:var(--fz-text-accent)">Pricing</p>
+    <h1 class="page-hero__title fz-display">Simple, Honest<br><span class="fz-gradient-text">Pricing</span></h1>
+    <p class="page-hero__subtitle">Start free. Upgrade when you're ready. No hidden fees, no dark patterns.</p>
+  </div>
+</section>
+<section class="section fz-container">
+  <div class="pricing-grid">
+    @for (tier of tiers; track tier.name) {
+      <div class="pricing-card" [class.pricing-card--highlighted]="tier.highlighted" data-reveal>
+        @if (tier.badge) { <div class="pricing-badge">{{ tier.badge }}</div> }
+        <div class="pricing-card__name">{{ tier.name }}</div>
+        <div class="pricing-card__price">{{ tier.price }}<span class="pricing-card__period">{{ tier.period }}</span></div>
+        <p class="pricing-card__desc">{{ tier.desc }}</p>
+        <a [routerLink]="tier.route" class="btn" [class.btn--primary]="tier.highlighted" [class.btn--outline]="!tier.highlighted" style="width:100%;justify-content:center;">{{ tier.cta }}</a>
+        <ul class="pricing-card__features">
+          @for (f of tier.features; track f) {
+            <li><span class="feature-check">✓</span> {{ f }}</li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</section>
+<section class="section fz-container faq-section">
+  <div class="section-header" data-reveal>
+    <h2 class="section-title fz-heading">Frequently Asked <span class="fz-gradient-text">Questions</span></h2>
+  </div>
+  <div class="faq-list">
+    @for (faq of faqs; track faq.q; let i = $index) {
+      <div class="faq-item" [class.faq-item--open]="openFaq() === i" data-reveal>
+        <button class="faq-question" (click)="toggleFaq(i)">{{ faq.q }}<span class="faq-icon">{{ openFaq() === i ? '−' : '+' }}</span></button>
+        @if (openFaq() === i) { <div class="faq-answer">{{ faq.a }}</div> }
+      </div>
+    }
+  </div>
+</section>

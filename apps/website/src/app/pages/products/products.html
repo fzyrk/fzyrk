@@ -1,0 +1,30 @@
+<section class="page-hero">
+  <div class="fz-container page-hero__content">
+    <p class="fz-overline" style="color:var(--fz-text-accent)">Our Tools</p>
+    <h1 class="page-hero__title fz-display">The Fzyrk <span class="fz-gradient-text">Suite</span></h1>
+    <p class="page-hero__subtitle">Six integrated tools designed to streamline your career growth and job application process.</p>
+  </div>
+</section>
+
+<section class="section fz-container">
+  <div class="products-grid">
+    @for (product of products; track product.id) {
+      <div class="product-card" [class.product-card--live]="product.status === 'live'" data-reveal>
+        <div class="product-card__header">
+          <div class="product-card__icon">{{ product.icon }}</div>
+          <span class="product-badge" [class]="getStatusClass(product.status)">{{ product.badge }}</span>
+        </div>
+        <h3 class="product-card__name">{{ product.name }}</h3>
+        <p class="product-card__desc">{{ product.description }}</p>
+        @if (product.status === 'live') {
+          <a [routerLink]="product.route" class="product-card__link">
+            Launch App
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        } @else {
+          <span class="product-card__soon">Coming Soon</span>
+        }
+      </div>
+    }
+  </div>
+</section>

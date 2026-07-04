@@ -1,0 +1,20 @@
+<button
+  [type]="type"
+  class="btn"
+  [ngClass]="classes"
+  [attr.disabled]="disabled || loading ? true : null"
+  [attr.aria-disabled]="disabled || loading"
+  [attr.aria-busy]="loading"
+  (click)="onClick($event)"
+>
+  @if (loading) {
+    <span class="btn__spinner" aria-hidden="true"></span>
+  }
+  @if (icon && !loading) {
+    <fz-icon [name]="icon" [size]="size === 'sm' ? 14 : size === 'lg' ? 20 : 16" />
+  }
+  <span class="btn__label"><ng-content /></span>
+  @if (iconRight && !loading) {
+    <fz-icon [name]="iconRight" [size]="size === 'sm' ? 14 : size === 'lg' ? 20 : 16" />
+  }
+</button>

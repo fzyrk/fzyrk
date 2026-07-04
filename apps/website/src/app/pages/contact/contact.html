@@ -1,0 +1,62 @@
+<section class="page-hero">
+  <div class="fz-container page-hero__content">
+    <p class="fz-overline" style="color:var(--fz-text-accent)">Contact</p>
+    <h1 class="page-hero__title fz-display">Let's <span class="fz-gradient-text">Talk</span></h1>
+    <p class="page-hero__subtitle">Have a question, feedback, or partnership idea? We'd love to hear from you.</p>
+  </div>
+</section>
+<section class="section fz-container">
+  <div class="contact-grid">
+    <div class="contact-info" data-reveal>
+      <h2 class="contact-info__title">Get in Touch</h2>
+      <p class="contact-info__desc">We typically respond within 24 hours on business days.</p>
+      <div class="contact-cards">
+        <div class="contact-card">
+          <span class="contact-card__icon">📧</span>
+          <div><h4>Email</h4><p>hello&#64;fzyrk.com</p></div>
+        </div>
+        <div class="contact-card">
+          <span class="contact-card__icon">📍</span>
+          <div><h4>Location</h4><p>India (Remote-first)</p></div>
+        </div>
+        <div class="contact-card">
+          <span class="contact-card__icon">🕐</span>
+          <div><h4>Response Time</h4><p>Within 24 hours</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-wrapper" data-reveal>
+      @if (!sent()) {
+        <form class="contact-form" (submit)="onSubmit($event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="name">Full Name</label>
+              <input id="name" class="form-input" type="text" placeholder="John Doe" required [value]="name()" (input)="name.set($any($event.target).value)">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address</label>
+              <input id="email" class="form-input" type="email" placeholder="john@example.com" required [value]="email()" (input)="email.set($any($event.target).value)">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="subject">Subject</label>
+            <input id="subject" class="form-input" type="text" placeholder="What's on your mind?" required [value]="subject()" (input)="subject.set($any($event.target).value)">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea id="message" class="form-textarea" rows="6" placeholder="Tell us more..." required [value]="message()" (input)="message.set($any($event.target).value)"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center;height:48px;" [disabled]="submitting()">
+            {{ submitting() ? 'Sending...' : 'Send Message' }}
+          </button>
+        </form>
+      } @else {
+        <div class="success-msg">
+          <div class="success-msg__icon">✅</div>
+          <h3>Message Sent!</h3>
+          <p>Thanks for reaching out. We'll get back to you within 24 hours.</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
