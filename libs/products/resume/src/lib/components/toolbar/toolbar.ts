@@ -4,17 +4,18 @@ import { ResumeService } from '../../services/resume.service';
 import { TemplateService } from '../../services/template.service';
 import { FontService } from '../../services/font.service';
 import { ExportService } from '../../services/export.service';
+import { FzProductLogoComponent } from '@fzyrk/ui';
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, FzProductLogoComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="toolbar">
       <div class="toolbar-left">
         <div class="logo">
-          <span class="logo-icon">📄</span>
+          <fz-product-logo productId="resume" class="logo-product-logo"></fz-product-logo>
           <span class="logo-text">ResumeBuilder</span>
         </div>
         <button class="toolbar-btn resumes-btn" (click)="dashboardRequest.emit()" title="My Resumes">
@@ -102,11 +103,6 @@ import { ExportService } from '../../services/export.service';
         <button class="toolbar-btn reset-btn" (click)="onReset()" title="Reset to default">
           <span>🔄</span>
         </button>
-
-        <!-- Theme Toggle -->
-        <button class="toolbar-btn icon-btn" (click)="toggleTheme()" title="Toggle Theme">
-          <span>{{ isDark() ? '☀️' : '🌙' }}</span>
-        </button>
       </div>
     </div>
   `,
@@ -140,7 +136,13 @@ import { ExportService } from '../../services/export.service';
       align-items: center;
       gap: 8px;
     }
-    .logo-icon { font-size: 1.4rem; }
+    .logo-product-logo ::ng-deep .product-logo-img {
+      width: 28px !important;
+      height: 28px !important;
+      border-radius: 6px !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
     .logo-text {
       font-size: 1rem;
       font-weight: 700;
@@ -287,7 +289,6 @@ export class ToolbarComponent {
   readonly exportRequest = output<void>();
   readonly dashboardRequest = output<void>();
   exporting = false;
-  readonly isDark = signal(true);
 
   async onExportPdf(): Promise<void> {
     this.exportRequest.emit();
@@ -297,11 +298,5 @@ export class ToolbarComponent {
     if (confirm('Reset resume to default? This cannot be undone.')) {
       this.resumeService.resetResume();
     }
-  }
-
-  toggleTheme(): void {
-    const dark = !this.isDark();
-    this.isDark.set(dark);
-    document.documentElement.setAttribute('data-theme', dark ? '' : 'light');
   }
 }

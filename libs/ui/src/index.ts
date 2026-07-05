@@ -10,3 +10,6 @@ export type { CardVariant, CardPadding } from './card/card';
 
 export { FzBadgeComponent } from './badge/badge';
 export type { BadgeVariant } from './badge/badge';
+
+// Product Logos
+export { FzProductLogoComponent } from './product-logo/product-logo';

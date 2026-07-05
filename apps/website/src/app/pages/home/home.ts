@@ -1,11 +1,12 @@
 import { Component, OnInit, inject, AfterViewInit, ElementRef, QueryList, ViewChildren, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { FzProductLogoComponent } from '@fzyrk/ui';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, FzProductLogoComponent],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

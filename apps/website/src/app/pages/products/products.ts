@@ -1,11 +1,12 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, AfterViewInit, PLATFORM_ID, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { FzProductLogoComponent } from '@fzyrk/ui';
 
 @Component({
   selector: 'app-products-list',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, FzProductLogoComponent],
   templateUrl: './products.html',
   styleUrl: './products.css',
 })

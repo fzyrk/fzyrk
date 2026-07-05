@@ -98,7 +98,9 @@
       @for (product of products; track product.id) {
         <div class="product-card" [class.product-card--live]="product.status === 'live'" data-reveal>
           <div class="product-card__header">
-            <div class="product-card__icon">{{ product.icon }}</div>
+            <div class="product-card__icon">
+              <fz-product-logo [productId]="product.id" />
+            </div>
             <span class="product-badge" [class]="getStatusClass(product.status)">{{ product.badge }}</span>
           </div>
           <h3 class="product-card__name">{{ product.name }}</h3>
