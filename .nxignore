@@ -1,0 +1,5 @@
+# Ignore directories that Nx shouldn't scan for projects
+node_modules
+.angular
+dist
+tmp
