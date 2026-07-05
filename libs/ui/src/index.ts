@@ -13,3 +13,6 @@ export type { BadgeVariant } from './badge/badge';
 
 // Product Logos
 export { FzProductLogoComponent } from './product-logo/product-logo';
+
+// Overlays
+export { FzConfirmModalComponent } from './confirm-modal/confirm-modal';

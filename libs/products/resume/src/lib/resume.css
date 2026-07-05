@@ -529,14 +529,62 @@ body {
   height: 90px;
 }
 
-/* ─── Print-safe styles for PDF ─── */
+/* ─── Print-safe styles for PDF export ─── */
 @media print {
-  body { background: white; }
-  .toolbar, .sidebar, .editor-container, .preview-header { display: none !important; }
+  /* Hide all UI chrome */
+  .toolbar,
+  .sidebar,
+  .editor-container,
+  .preview-header,
+  .zoom-controls {
+    display: none !important;
+  }
+
+  html, body {
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Resume page: fill the print area, let height be auto for multi-page */
   .resume-page {
-    box-shadow: none;
-    width: 100%;
-    padding: 0;
-    margin: 0;
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+    background: white !important;
+    font-size: 10pt !important;
+  }
+
+  /* Each section avoids being split across pages */
+  .preview-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Section titles should not be the last line on a page */
+  .preview-section-title {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Individual entries stay together if possible */
+  .experience-entry,
+  .education-entry,
+  .project-entry {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Preserve background colors and gradients in print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
   }
 }
+

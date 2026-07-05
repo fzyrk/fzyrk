@@ -23,9 +23,9 @@ export class ResumeService {
   private readonly persistence = inject(PersistenceService);
   private readonly fontService = inject(FontService);
 
-  // Undo/Redo history — must be declared before _resume since loadInitial() references them
+  // Undo/Redo history — historyIndex is a signal so canUndo/canRedo are reactive
   private history: ResumeData[] = [];
-  private historyIndex = -1;
+  private readonly _historyIndex = signal(-1);
   private readonly maxHistory = 50;
   private skipHistory = false;
 
@@ -47,6 +47,40 @@ export class ResumeService {
   readonly accentColor = computed(() => this._resume().accentColor);
   readonly resumeName = computed(() => this._resume().name);
 
+  // Reactive undo/redo availability
+  readonly canUndo = computed(() => this._historyIndex() > 0);
+  readonly canRedo = computed(() => this._historyIndex() < this.history.length - 1);
+
+  // Resume completeness score (0–100)
+  readonly completenessScore = computed(() => {
+    const sections = this._resume().sections;
+    let score = 0;
+    const checks = [
+      // Header has a real name
+      sections.some(s => s.type === 'header' && (s.data as HeaderData).fullName?.trim().length > 2 && (s.data as HeaderData).fullName !== 'John Doe' && (s.data as HeaderData).fullName !== 'Your Name'),
+      // Header has a job title
+      sections.some(s => s.type === 'header' && (s.data as HeaderData).jobTitle?.trim().length > 2 && (s.data as HeaderData).jobTitle !== 'Your Title'),
+      // Contact has email
+      sections.some(s => s.type === 'contact' && (s.data as ContactData).email?.trim()),
+      // Contact has phone
+      sections.some(s => s.type === 'contact' && (s.data as ContactData).phone?.trim()),
+      // Contact has location
+      sections.some(s => s.type === 'contact' && (s.data as ContactData).location?.trim()),
+      // Has summary with real content
+      sections.some(s => s.type === 'summary' && (s.data as SummaryData).text?.trim().length > 50),
+      // Has experience with at least 1 item
+      sections.some(s => s.type === 'experience' && (s.data as ExperienceData).items?.length > 0),
+      // Has experience description
+      sections.some(s => s.type === 'experience' && (s.data as ExperienceData).items?.some(i => i.description?.trim().length > 20)),
+      // Has education
+      sections.some(s => s.type === 'education' && (s.data as EducationData).items?.length > 0),
+      // Has skills
+      sections.some(s => s.type === 'skills' && (s.data as SkillsData).categories?.some(c => c.skills.length > 0)),
+    ];
+    score = Math.round((checks.filter(Boolean).length / checks.length) * 100);
+    return score;
+  });
+
   constructor() {
     // Load the initial font
     this.fontService.loadFont(this._resume().fontFamily);
@@ -59,8 +93,8 @@ export class ResumeService {
   }
 
   private loadInitial(): ResumeData {
-    const persistence = new PersistenceService();
-    const saved = persistence.loadLatest();
+    // Use the injected persistence service (already available at construction time via inject())
+    const saved = this.persistence.loadLatest();
     const data = saved ?? { ...DEFAULT_RESUME };
     this.pushHistory(data);
     return data;
@@ -69,12 +103,13 @@ export class ResumeService {
   private pushHistory(data: ResumeData): void {
     if (this.skipHistory) return;
     // Remove any future history if we're not at the end
-    this.history = this.history.slice(0, this.historyIndex + 1);
+    const currentIndex = this._historyIndex();
+    this.history = this.history.slice(0, currentIndex + 1);
     this.history.push(JSON.parse(JSON.stringify(data)));
     if (this.history.length > this.maxHistory) {
       this.history.shift();
     }
-    this.historyIndex = this.history.length - 1;
+    this._historyIndex.set(this.history.length - 1);
   }
 
   private update(partial: Partial<ResumeData>): void {
@@ -88,23 +123,20 @@ export class ResumeService {
   }
 
   undo(): void {
-    if (this.historyIndex <= 0) return;
-    this.historyIndex--;
+    if (!this.canUndo()) return;
+    this._historyIndex.update(i => i - 1);
     this.skipHistory = true;
-    this._resume.set(JSON.parse(JSON.stringify(this.history[this.historyIndex])));
+    this._resume.set(JSON.parse(JSON.stringify(this.history[this._historyIndex()])));
     this.skipHistory = false;
   }
 
   redo(): void {
-    if (this.historyIndex >= this.history.length - 1) return;
-    this.historyIndex++;
+    if (!this.canRedo()) return;
+    this._historyIndex.update(i => i + 1);
     this.skipHistory = true;
-    this._resume.set(JSON.parse(JSON.stringify(this.history[this.historyIndex])));
+    this._resume.set(JSON.parse(JSON.stringify(this.history[this._historyIndex()])));
     this.skipHistory = false;
   }
-
-  canUndo = computed(() => this.historyIndex > 0);
-  canRedo = computed(() => this.historyIndex < this.history.length - 1);
 
   // Section operations
   addSection(type: SectionType): void {
@@ -207,7 +239,7 @@ export class ResumeService {
   loadResume(data: ResumeData): void {
     this.fontService.loadFont(data.fontFamily);
     this.history = [];
-    this.historyIndex = -1;
+    this._historyIndex.set(-1);
     this._resume.set(data);
     this.pushHistory(data);
   }
