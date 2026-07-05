@@ -82,6 +82,8 @@ interface SectionOption {
       min-width: 280px;
       height: 100%;
       background: var(--sidebar-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-right: 1px solid var(--border-color);
       display: flex;
       flex-direction: column;

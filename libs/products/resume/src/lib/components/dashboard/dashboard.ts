@@ -144,7 +144,14 @@ import { generateId, DEFAULT_RESUME, ResumeData } from '../../models/resume.mode
       position: relative;
       display: flex;
       flex-direction: column;
+      animation: scaleIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
     }
+    .resume-card:nth-child(1) { animation-delay: 0.05s; }
+    .resume-card:nth-child(2) { animation-delay: 0.1s; }
+    .resume-card:nth-child(3) { animation-delay: 0.15s; }
+    .resume-card:nth-child(4) { animation-delay: 0.2s; }
+    .resume-card:nth-child(5) { animation-delay: 0.25s; }
+    .resume-card:nth-child(6) { animation-delay: 0.3s; }
     .resume-card:hover {
       border-color: var(--accent);
       transform: translateY(-2px);

@@ -1,4 +1,5 @@
-import { Component, OnInit, inject, AfterViewInit, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, inject, AfterViewInit, ElementRef, QueryList, ViewChildren, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -48,8 +49,12 @@ export class HomeComponent implements AfterViewInit {
     { icon: '🚀', title: 'Built for Growth',    description: 'Start free, grow as you go. Our platform scales with your career journey.' },
   ];
 
+  private platformId = inject(PLATFORM_ID);
+
   ngAfterViewInit(): void {
-    this.initScrollReveal();
+    if (isPlatformBrowser(this.platformId)) {
+      this.initScrollReveal();
+    }
   }
 
   private initScrollReveal(): void {

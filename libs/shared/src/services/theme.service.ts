@@ -13,11 +13,15 @@ export class ThemeService {
   theme = signal<Theme>(this.getStoredTheme());
 
   constructor() {
-    // Apply theme class on change
+    // Apply theme class on change safely
     effect(() => {
       const t = this.theme();
-      document.documentElement.setAttribute('data-theme', t);
-      localStorage.setItem(this.STORAGE_KEY, t);
+      if (typeof document !== 'undefined') {
+        document.documentElement.setAttribute('data-theme', t);
+      }
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem(this.STORAGE_KEY, t);
+      }
     });
   }
 

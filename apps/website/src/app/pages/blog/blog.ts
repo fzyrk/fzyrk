@@ -1,9 +1,19 @@
-import { Component, AfterViewInit, signal } from '@angular/core';
-import { NgClass } from '@angular/common';
-@Component({ selector: 'app-blog', standalone: true, imports: [NgClass], templateUrl: './blog.html', styleUrl: './blog.css' })
+import { isPlatformBrowser, NgClass } from '@angular/common';
+import { Component, AfterViewInit, signal, PLATFORM_ID, inject } from '@angular/core';
+
+@Component({
+  selector: 'app-blog',
+  standalone: true,
+  imports: [NgClass],
+  templateUrl: './blog.html',
+  styleUrl: './blog.css'
+})
 export class BlogComponent implements AfterViewInit {
+  private platformId = inject(PLATFORM_ID);
+  
   activeCategory = signal('All');
   readonly categories = ['All', 'Career', 'Tech', 'Startup', 'Design'];
+  
   readonly posts = [
     { title: 'How to Build an ATS-Friendly Resume in 2026', category: 'Career', readTime: '5 min', date: 'Jul 1, 2026', excerpt: 'Applicant Tracking Systems reject 75% of resumes before a human ever sees them. Here\'s how to beat them.' },
     { title: 'The Ultimate Angular Signals Guide for 2026', category: 'Tech', readTime: '8 min', date: 'Jun 28, 2026', excerpt: 'Signals are Angular\'s future. Learn how to use them effectively in production apps.' },
@@ -12,7 +22,37 @@ export class BlogComponent implements AfterViewInit {
     { title: '10 Resume Mistakes That Cost You Interviews', category: 'Career', readTime: '4 min', date: 'Jun 10, 2026', excerpt: 'Common resume errors we see thousands of times — and exactly how to fix them.' },
     { title: 'Nx Monorepo Setup for Angular Apps in 2026', category: 'Tech', readTime: '10 min', date: 'Jun 5, 2026', excerpt: 'A complete guide to setting up an Nx Angular monorepo with shared libraries.' },
   ];
-  setCategory(cat: string) { this.activeCategory.set(cat); }
-  get filteredPosts() { return this.activeCategory() === 'All' ? this.posts : this.posts.filter(p => p.category === this.activeCategory()); }
-  ngAfterViewInit() { const obs = new IntersectionObserver((e) => e.forEach(x => { if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target);}}),{threshold:0.1}); document.querySelectorAll('[data-reveal]').forEach(el => {el.classList.add('fz-reveal');obs.observe(el);}); }
+
+  setCategory(cat: string) {
+    this.activeCategory.set(cat);
+  }
+
+  get filteredPosts() {
+    return this.activeCategory() === 'All' ? this.posts : this.posts.filter(p => p.category === this.activeCategory());
+  }
+
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.initScrollReveal();
+    }
+  }
+
+  private initScrollReveal(): void {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+      el.classList.add('fz-reveal');
+      observer.observe(el);
+    });
+  }
 }

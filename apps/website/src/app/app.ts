@@ -1,6 +1,7 @@
 import { Component, OnInit, inject, signal, HostListener } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgClass } from '@angular/common';
+import { ThemeService } from '@fzyrk/shared';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,8 @@ export class AppComponent implements OnInit {
   mobileMenuOpen = signal(false);
   scrolled = signal(false);
   currentYear = new Date().getFullYear();
+
+  readonly themeService = inject(ThemeService);
 
   readonly navLinks = [
     { label: 'Home',     route: '/' },

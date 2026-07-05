@@ -107,3 +107,41 @@
   --fz-z-toast:    500;
   --fz-z-tooltip:  600;
 }
+
+[data-theme="light"] {
+  /* ── Brand Colors (Light-optimized) ── */
+  --fz-accent:            #4f46e5;
+  --fz-accent-hover:      #4338ca;
+  --fz-accent-active:     #3730a3;
+  --fz-accent-glow:       rgba(79, 70, 229, 0.08);
+  --fz-accent-2:          #9333ea;
+
+  /* ── Backgrounds ── */
+  --fz-bg-deep:           #f3f4f6;
+  --fz-bg-base:           #f9fafb;
+  --fz-bg-surface:        #ffffff;
+  --fz-bg-elevated:       rgba(243, 244, 246, 0.7);
+  --fz-bg-glass:          rgba(255, 255, 255, 0.8);
+  --fz-bg-overlay:        rgba(15, 15, 25, 0.3);
+
+  /* ── Text ── */
+  --fz-text-primary:      #111827;
+  --fz-text-secondary:    #4b5563;
+  --fz-text-muted:        #9ca3af;
+  --fz-text-inverse:      #ffffff;
+  --fz-text-accent:       #4f46e5;
+
+  /* ── Borders ── */
+  --fz-border:            rgba(0, 0, 0, 0.08);
+  --fz-border-strong:     rgba(0, 0, 0, 0.15);
+  --fz-border-glow:       rgba(79, 70, 229, 0.2);
+
+  /* ── Shadows ── */
+  --fz-shadow-xs:      0 1px 2px rgba(0,0,0,0.05);
+  --fz-shadow-sm:      0 1px 3px rgba(0,0,0,0.08);
+  --fz-shadow-md:      0 4px 16px rgba(0,0,0,0.06);
+  --fz-shadow-lg:      0 8px 32px rgba(0,0,0,0.1);
+  --fz-shadow-xl:      0 16px 48px rgba(0,0,0,0.12);
+  --fz-shadow-glow:    0 0 32px rgba(79,70,229,0.12);
+  --fz-shadow-glow-lg: 0 0 64px rgba(79,70,229,0.18);
+}

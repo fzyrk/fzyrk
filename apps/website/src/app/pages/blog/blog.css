@@ -22,3 +22,10 @@
 .coming-soon-banner p{color:var(--fz-text-secondary);font-size:var(--fz-text-base);}
 @media(max-width:1024px){.blog-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:640px){.blog-grid{grid-template-columns:1fr;}}
+
+.blog-card.visible:nth-child(1) { transition-delay: 50ms; }
+.blog-card.visible:nth-child(2) { transition-delay: 100ms; }
+.blog-card.visible:nth-child(3) { transition-delay: 150ms; }
+.blog-card.visible:nth-child(4) { transition-delay: 200ms; }
+.blog-card.visible:nth-child(5) { transition-delay: 250ms; }
+.blog-card.visible:nth-child(6) { transition-delay: 300ms; }

@@ -71,6 +71,44 @@
   --fz-z-modal: 400; --fz-z-toast: 500; --fz-z-tooltip: 600;
 }
 
+[data-theme="light"] {
+  /* ── Brand Colors (Light-optimized) ── */
+  --fz-accent:            #4f46e5;
+  --fz-accent-hover:      #4338ca;
+  --fz-accent-active:     #3730a3;
+  --fz-accent-glow:       rgba(79, 70, 229, 0.08);
+  --fz-accent-2:          #9333ea;
+
+  /* ── Backgrounds ── */
+  --fz-bg-deep:           #f3f4f6;
+  --fz-bg-base:           #f9fafb;
+  --fz-bg-surface:        #ffffff;
+  --fz-bg-elevated:       rgba(243, 244, 246, 0.7);
+  --fz-bg-glass:          rgba(255, 255, 255, 0.8);
+  --fz-bg-overlay:        rgba(15, 15, 25, 0.3);
+
+  /* ── Text ── */
+  --fz-text-primary:      #111827;
+  --fz-text-secondary:    #4b5563;
+  --fz-text-muted:        #9ca3af;
+  --fz-text-inverse:      #ffffff;
+  --fz-text-accent:       #4f46e5;
+
+  /* ── Borders ── */
+  --fz-border:            rgba(0, 0, 0, 0.08);
+  --fz-border-strong:     rgba(0, 0, 0, 0.15);
+  --fz-border-glow:       rgba(79, 70, 229, 0.2);
+
+  /* ── Shadows ── */
+  --fz-shadow-xs:      0 1px 2px rgba(0,0,0,0.05);
+  --fz-shadow-sm:      0 1px 3px rgba(0,0,0,0.08);
+  --fz-shadow-md:      0 4px 16px rgba(0,0,0,0.06);
+  --fz-shadow-lg:      0 8px 32px rgba(0,0,0,0.1);
+  --fz-shadow-xl:      0 16px 48px rgba(0,0,0,0.12);
+  --fz-shadow-glow:    0 0 32px rgba(79,70,229,0.12);
+  --fz-shadow-glow-lg: 0 0 64px rgba(79,70,229,0.18);
+}
+
 /* Reset */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; width: 100%; }
@@ -81,6 +119,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: var(--fz-leading-normal);
+  transition: background-color var(--fz-dur-normal) var(--fz-ease-smooth),
+              color var(--fz-dur-normal) var(--fz-ease-smooth);
 }
 img, video, svg { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
@@ -91,10 +131,10 @@ ul, ol { list-style: none; }
 :focus-visible { outline: 2px solid var(--fz-accent); outline-offset: 2px; }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(100,100,160,0.3); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(100,100,160,0.5); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--fz-bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--fz-border-strong); border-radius: var(--fz-radius-full); border: 2px solid var(--fz-bg-deep); }
+::-webkit-scrollbar-thumb:hover { background: var(--fz-border-glow); }
 
 /* Typography classes */
 .fz-display  { font-family: var(--fz-font-display); font-weight: 800; line-height: var(--fz-leading-tight); }
@@ -149,3 +189,54 @@ ul, ol { list-style: none; }
 .btn--outline { background: transparent; color: var(--fz-accent); border-color: var(--fz-accent); font-size: var(--fz-text-sm); padding: var(--fz-space-3) var(--fz-space-6); height: 40px; }
 .btn--outline:hover { background: var(--fz-accent-glow); box-shadow: var(--fz-shadow-glow); }
 .btn--lg { font-size: var(--fz-text-base); padding: var(--fz-space-4) var(--fz-space-8); height: 52px; }
+
+/* ── Modern Glowing Cards & Hover Backdrop Effects ── */
+.product-card, .pricing-card, .blog-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--fz-dur-normal) var(--fz-ease-spring),
+              box-shadow var(--fz-dur-normal) var(--fz-ease-spring),
+              border-color var(--fz-dur-normal) var(--fz-ease-spring) !important;
+}
+
+.product-card::after, .pricing-card::after, .blog-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(99, 102, 241, 0.12) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity var(--fz-dur-normal) var(--fz-ease-out), transform var(--fz-dur-slow) var(--fz-ease-out);
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme="light"] .product-card::after,
+[data-theme="light"] .pricing-card::after,
+[data-theme="light"] .blog-card::after {
+  background: radial-gradient(circle at center, rgba(79, 70, 229, 0.08) 0%, transparent 60%);
+}
+
+.product-card:hover::after, .pricing-card:hover::after, .blog-card:hover::after {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.product-card > *, .pricing-card > *, .blog-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.product-card:hover, .pricing-card:hover, .blog-card:hover {
+  transform: translateY(-8px) !important;
+  border-color: var(--fz-border-glow) !important;
+  box-shadow: var(--fz-shadow-xl), var(--fz-shadow-glow) !important;
+}
+
+/* Slide-up keyframe definition */
+@keyframes fz-slide-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,4 +1,5 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, AfterViewInit, PLATFORM_ID, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -9,6 +10,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './about.css',
 })
 export class AboutComponent implements AfterViewInit {
+  private platformId = inject(PLATFORM_ID);
+  
   readonly values = [
     { icon: '🎯', title: 'Purpose-Driven',   description: 'Every feature we build solves a real problem for real job seekers.' },
     { icon: '⚡', title: 'Speed & Quality',   description: 'We move fast without cutting corners. Performance is a feature.' },
@@ -28,10 +31,27 @@ export class AboutComponent implements AfterViewInit {
   ];
 
   ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.initScrollReveal();
+    }
+  }
+
+  private initScrollReveal(): void {
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
       { threshold: 0.1 }
     );
-    document.querySelectorAll('[data-reveal]').forEach(el => { el.classList.add('fz-reveal'); observer.observe(el); });
+
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+      el.classList.add('fz-reveal');
+      observer.observe(el);
+    });
   }
 }

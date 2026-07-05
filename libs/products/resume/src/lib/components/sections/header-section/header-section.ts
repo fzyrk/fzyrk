@@ -1,6 +1,7 @@
-import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HeaderData } from '../../../models/resume.model';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-header-section',
@@ -113,6 +114,7 @@ export class HeaderSectionComponent {
   readonly data = input.required<HeaderData>();
   readonly editMode = input(false);
   readonly dataChange = output<HeaderData>();
+  private readonly toastService = inject(ToastService);
 
   onFieldChange(field: keyof HeaderData, value: string): void {
     this.dataChange.emit({ ...this.data(), [field]: value });
@@ -122,7 +124,7 @@ export class HeaderSectionComponent {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (!file) return;
     if (file.size > 500 * 1024) {
-      alert('Photo must be under 500KB for LocalStorage compatibility.');
+      this.toastService.show('Photo must be under 500KB for LocalStorage compatibility.', 'danger');
       return;
     }
 

@@ -1,4 +1,5 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, AfterViewInit, PLATFORM_ID, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -9,6 +10,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './products.css',
 })
 export class ProductsListComponent implements AfterViewInit {
+  private platformId = inject(PLATFORM_ID);
+  
   readonly products = [
     { id: 'resume',    icon: '📄', name: 'Resume Builder',   description: 'Create stunning, ATS-friendly resumes in minutes with our live editor and beautiful templates.', status: 'live',         route: '/products/resume',    badge: 'Live' },
     { id: 'portfolio', icon: '🌐', name: 'Portfolio Builder', description: 'Auto-generate a beautiful portfolio website from your resume data with custom themes.',          status: 'coming-soon',  route: '/products/portfolio', badge: 'Soon' },
@@ -19,13 +22,21 @@ export class ProductsListComponent implements AfterViewInit {
   ];
 
   ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.initScrollReveal();
+    }
+  }
+
+  private initScrollReveal(): void {
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      }),
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
       { threshold: 0.1 }
     );
 

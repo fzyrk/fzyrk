@@ -20,25 +20,41 @@
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  animation: fz-float 6s ease-in-out infinite;
+  animation: fz-float-orb 16s ease-in-out infinite alternate;
 }
 
 .hero__orb--1 {
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%);
   top: -200px;
   left: -100px;
-  animation-delay: 0s;
+  animation-duration: 20s;
 }
 
 .hero__orb--2 {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%);
   bottom: -100px;
   right: -100px;
-  animation-delay: -3s;
+  animation-duration: 15s;
+  animation-delay: -5s;
+}
+
+@keyframes fz-float-orb {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(80px, 50px) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-40px, 80px) scale(0.9);
+    opacity: 0.7;
+  }
 }
 
 .hero__grid-lines {
@@ -120,7 +136,6 @@
   gap: var(--fz-space-10);
   flex-wrap: wrap;
   justify-content: center;
-  animation: fz-fade-in 0.6s 0.4s var(--fz-ease-out) both;
   margin-top: var(--fz-space-4);
 }
 
@@ -129,7 +144,12 @@
   flex-direction: column;
   align-items: center;
   gap: 2px;
+  animation: fz-slide-up var(--fz-dur-slow) var(--fz-ease-spring) both;
 }
+
+.hero__stat:nth-child(1) { animation-delay: 0.5s; }
+.hero__stat:nth-child(2) { animation-delay: 0.65s; }
+.hero__stat:nth-child(3) { animation-delay: 0.8s; }
 
 .hero__stat-value {
   font-family: var(--fz-font-display);
@@ -152,6 +172,7 @@
   position: relative;
   z-index: 1;
   margin-top: var(--fz-space-16);
+  perspective: 1000px;
   animation: fz-scale-in 0.8s 0.5s var(--fz-ease-out) both;
 }
 
@@ -163,6 +184,15 @@
   box-shadow: var(--fz-shadow-xl), var(--fz-shadow-glow-lg);
   max-width: 860px;
   margin: 0 auto;
+  transform: rotateX(8deg) rotateY(-8deg) rotateZ(1.5deg);
+  transform-style: preserve-3d;
+  transition: transform var(--fz-dur-slow) var(--fz-ease-spring),
+              box-shadow var(--fz-dur-slow) var(--fz-ease-spring);
+}
+
+.hero__preview-card:hover {
+  transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateY(-8px);
+  box-shadow: var(--fz-shadow-xl), 0 20px 40px rgba(99, 102, 241, 0.2);
 }
 
 .preview-topbar {

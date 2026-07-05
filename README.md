@@ -1,8 +1,8 @@
 # 🚀 Fzyrk
 
-> **Build. Showcase. Grow.**
+> **BUILD. GROW. SUCCEED.**
 
-Fzyrk is a modern technology company building intelligent software products that help professionals build, showcase, and grow their careers.
+Fzyrk (pronounced **Fiz-erk** or **Fiz-urk**) is a modern platform that empowers professionals to build, showcase, and grow their careers with intelligent tools.
 
 ---
 
@@ -12,7 +12,7 @@ Fzyrk is a CareerTech platform delivering a suite of beautifully designed, acces
 
 ### Mission
 
-Build intelligent software that helps professionals **build**, **showcase**, and **grow** their careers.
+To empower professionals to build, showcase, and grow their careers through intelligent, beautifully designed software.
 
 ### Vision
 
@@ -27,21 +27,17 @@ This project uses an **Nx Angular monorepo** with the following structure:
 ```
 fzyrk/
 ├── apps/
-│   ├── website/          → Marketing website (fzyrk.com)
-│   └── products/
-│       ├── resume/       → Resume Builder (/products/resume)
-│       ├── portfolio/    → Portfolio Builder (/products/portfolio)
-│       ├── ai/           → AI Assistant (/products/ai)
-│       ├── interview/    → Interview Platform (/products/interview)
-│       ├── learn/        → Learning Platform (/products/learn)
-│       └── jobs/         → Job Board (/products/jobs)
+│   ├── website/          → Marketing website + shell (fzyrk.com)
+│   └── website-e2e/      → Playwright end-to-end tests
 │
 ├── libs/
 │   ├── theme/            → Design tokens, global styles
 │   ├── icons/            → SVG icon component library
 │   ├── ui/               → Fzyrk UI component library
 │   ├── shared/           → Shared directives, pipes, services
-│   └── models/           → TypeScript interfaces & types
+│   ├── models/           → TypeScript interfaces & types
+│   └── products/
+│       └── resume/       → Resume Builder library lazy-loaded by website
 │
 └── docs/                 → Documentation
 ```
@@ -102,11 +98,8 @@ npm install
 ### Development
 
 ```bash
-# Serve the website app
+# Serve the website app (includes Resume Builder under /products/resume)
 npx nx serve website
-
-# Serve a specific product app
-npx nx serve resume
 
 # Run all tests
 npx nx run-many --target=test --all
@@ -142,6 +135,7 @@ All documentation lives in the [`docs/`](./docs/) directory:
 
 | Document | Description |
 |---|---|
+| [Developer Guide Phase 1](./developerGuidePhase1.md) | **Detailed code map, file layouts, and CLI commands for Phase 1 & 2** |
 | [Architecture](./docs/ARCHITECTURE.md) | System architecture, patterns, and technical decisions |
 | [Folder Structure](./docs/FOLDER_STRUCTURE.md) | Detailed project folder structure guide |
 | [Component Library](./docs/COMPONENT_LIBRARY.md) | Fzyrk UI component catalog and usage |

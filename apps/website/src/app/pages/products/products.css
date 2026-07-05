@@ -135,3 +135,10 @@
     grid-template-columns: 1fr;
   }
 }
+
+.product-card.visible:nth-child(1) { transition-delay: 50ms; }
+.product-card.visible:nth-child(2) { transition-delay: 100ms; }
+.product-card.visible:nth-child(3) { transition-delay: 150ms; }
+.product-card.visible:nth-child(4) { transition-delay: 200ms; }
+.product-card.visible:nth-child(5) { transition-delay: 250ms; }
+.product-card.visible:nth-child(6) { transition-delay: 300ms; }
